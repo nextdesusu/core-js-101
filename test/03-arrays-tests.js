@@ -228,10 +228,11 @@ describe('03-arrays-tasks', () => {
         expected: ['x', 1, 'b', 'c'],
       },
     ].forEach((data) => {
+      const actual = tasks.insertItem(data.arr, data.item, data.index);
       tasks.insertItem(data.arr, data.item, data.index);
       assert.deepEqual(
         data.expected,
-        data.arr,
+        actual,
       );
     });
   });

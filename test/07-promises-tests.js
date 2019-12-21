@@ -68,13 +68,7 @@ describe('07-promises-tasks', () => {
         const errorMessage = error instanceof Error ? error : defaultRejectionMessage;
         messages.push(errorMessage.message);
       })
-      .finally(() => {
-        if (messages.length > 0) {
-          done(Error(`\t${messages.join(';\n\t\t')}`));
-        } else {
-          done();
-        }
-      });
+      .then(done, done);
   }, true);
 
   it.optional('function processAllPromises should return correct Promise that will be resolved with array of values', (done) => {
@@ -118,13 +112,7 @@ describe('07-promises-tasks', () => {
         const errorMessage = error instanceof Error ? error : defaultRejectionMessage;
         messages.push(errorMessage.message);
       })
-      .finally(() => {
-        if (messages.length > 0) {
-          done(Error(`\t${messages.join(';\n\t\t')}`));
-        } else {
-          done();
-        }
-      });
+      .then(done, done);
   }, true);
 
   it.optional('function getFastestPromise should return correct Promise that will be resolved with value of first resolved Promise', (done) => {
@@ -177,7 +165,13 @@ describe('07-promises-tasks', () => {
         const errorMessage = error instanceof Error ? error : defaultRejectionMessage;
         messages.push(errorMessage.message);
       })
-      .finally(() => {
+      .then(() => {
+        if (messages.length > 0) {
+          done(Error(`\t${messages.join(';\n\t\t')}`));
+        } else {
+          done();
+        }
+      }, () => {
         if (messages.length > 0) {
           done(Error(`\t${messages.join(';\n\t\t')}`));
         } else {
@@ -258,12 +252,6 @@ describe('07-promises-tasks', () => {
         const errorMessage = error instanceof Error ? error : defaultRejectionMessage;
         messages.push(errorMessage.message);
       })
-      .finally(() => {
-        if (messages.length > 0) {
-          done(Error(`\t${messages.join(';\n\t\t')}`));
-        } else {
-          done();
-        }
-      });
+      .then(done, done);
   }, true);
 });
